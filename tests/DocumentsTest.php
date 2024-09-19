@@ -360,6 +360,26 @@ class DocumentsTest extends _Base
     /**
      * @test
      *
+     * Test resend document to sign in Autentique
+     * @return void
+     */
+    public function testResendSignatures(): void
+    {
+        $data = $this->createDocument();
+
+        $sig = $this->documents->resendSignatures([$data["data"]["createDocument"]["signatures"][0]['public_id']]);
+        var_dump($sig);
+        $this->assertArrayHasKey(
+            "resendSignatures",
+            $sig["data"],
+            self::ERROR_ARRAY_DOESNT_CONTAINS_DATA
+        );
+        $this->assertTrue($sig["data"]["resendSignatures"]);
+    }
+
+    /**
+     * @test
+     *
      * Test timeouted operation
      * @return void
      */
