@@ -336,6 +336,30 @@ class DocumentsTest extends _Base
     /**
      * @test
      *
+     * Test Add create link to signature on document in Autentique
+     * @return void
+     */
+    public function testCreateLinkToSignature(): void
+    {
+        $data = $this->createDocument();
+
+        $link = $this->documents->createLinkToSignature($data["data"]["createDocument"]["signatures"][0]['public_id']);
+  
+        $this->assertArrayHasKey(
+            "createLinkToSignature",
+            $link["data"],
+            self::ERROR_ARRAY_DOESNT_CONTAINS_DATA
+        );
+        $this->assertArrayHasKey(
+            "short_link",
+            $link["data"]['createLinkToSignature'],
+            self::ERROR_ARRAY_DOESNT_CONTAINS_DATA
+        );
+    }
+
+    /**
+     * @test
+     *
      * Test timeouted operation
      * @return void
      */
