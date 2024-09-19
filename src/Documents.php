@@ -264,4 +264,27 @@ class Documents extends BaseResource
 
         return $this->api->request($this->token, $graphMutation, "json");
     }
+
+    /**
+     * Create an link to sign the document
+     * @api
+     * @param array $publicIds signers UUIDs
+     * @return array
+     */
+    public function resendSignatures(array $publicIds): array
+    {
+        $variables = [
+            "public_ids" => $publicIds,
+        ];
+
+        $graphMutation = $this->query->query(__FUNCTION__);
+
+        $graphMutation = $this->query->setVariables(
+            ["variables"],
+            [json_encode($variables)],
+            $graphMutation
+        );
+
+        return $this->api->request($this->token, $graphMutation, "json");
+    }
 }
