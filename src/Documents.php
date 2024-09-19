@@ -241,4 +241,27 @@ class Documents extends BaseResource
 
         return $this->api->request($this->token, $graphMutation, "json");
     }
+
+    /**
+     * Create an link to sign the document
+     * @api
+     * @param string $publicIds Signer UUID
+     * @return array
+     */
+    public function createLinkToSignature(string $publicId): array
+    {
+        $variables = [
+            "public_id" => $publicId,
+        ];
+
+        $graphMutation = $this->query->query(__FUNCTION__);
+
+        $graphMutation = $this->query->setVariables(
+            ["variables"],
+            [json_encode($variables)],
+            $graphMutation
+        );
+
+        return $this->api->request($this->token, $graphMutation, "json");
+    }
 }
