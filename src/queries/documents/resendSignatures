@@ -1,0 +1,4 @@
+ "mutation resendSignatures($public_ids: UUID!) {
+  resendSignatures(public_ids: $public_ids)
+}",
+"variables": $variables
